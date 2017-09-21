@@ -13,7 +13,17 @@ mixer = alsaaudio.Mixer()
 class Volume:
 	volume = int(mixer.getvolume()[0] / 20)
 	
+	#increase the volume
+	@classmethod
+	def increase(cls):
+		Volume.volume += 1
+
+	#decrease the volume
+	@classmethod	
+	def decrease(cls):
+		Volume.volume -= 1
 	
+
 #Display Volume Slider, increase/decrease with input, pass value to curses
 def main():
 	while True:
@@ -26,10 +36,10 @@ def main():
 			
 			if kInput == 261 and Volume.volume <= 20: #-->
 				if Volume.volume != 20:
-					Volume.volume += 1
+					Volume.increase()
 			elif kInput == 260 and Volume.volume >= 0:#<--
 				if Volume.volume != 0:
-					Volume.volume -= 1
+					Volume.decrease()
 			elif kInput == 113: #Q
 				exitApplication()
 				
